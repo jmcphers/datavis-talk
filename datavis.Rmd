@@ -1,6 +1,10 @@
 ---
 title: "Visualizing Big Data with R"
-output: html_document
+output: 
+  revealjs::revealjs_presentation:
+    theme: serif
+    css: datavis.css
+    incremental: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -74,11 +78,11 @@ R has a first-class REPL, or Read Evaluate Print Loop.
 
 - Share your data analysis *process*, not just the final product
 - Your analysis can be repeated, start to finish
-  - Validation of results by others
-  - Re-run analysis when data changes
+    - Validation of results by others
+    - Re-run analysis when data changes
 - R scripts are just text
-  - Amenable to version control
-  - Easy to share, combine, edit, remix
+    - Amenable to version control
+    - Easy to share, combine, edit, remix
 
 ## Ecosystem (data pipeline)
 
@@ -91,7 +95,7 @@ Then you need to shape it into the right format and analyze/summarize. Finally, 
 - Data import (readxl, rodbc, rvest)
 - Data tidying, transformation (dplyr, tidyr)
 - Analysis, modeling, simulation (various)
-  - Many new stats tools are in R first
+    - Many new stats tools are in R first
 - Visualization systems (ggplot, htmlwidgets)
 - Reporting systems (knitr, rmarkdown)
 
@@ -118,13 +122,13 @@ The second one is a newer extension which allows bindings to existing JavaScript
 </div>
 
 - Graphics Devices
-  - Built-in primitives
-  - Drawing commands issued by plotting libraries
-  - Publication quality PDF, SVG, PNG, JPG, etc. 
+    - Built-in primitives
+    - Drawing commands issued by plotting libraries
+    - Publication quality PDF, SVG, PNG, JPG, etc. 
 - HTML
-  - Tags emitted by plotting libraries
-  - Modern, interactive web visualizations 
-  - Use third-party JavaScript plotting libraries
+    - Tags emitted by plotting libraries
+    - Modern, interactive web visualizations 
+    - Use third-party JavaScript plotting libraries
   
 ## Simple visualizations
 
@@ -190,7 +194,9 @@ forceNetwork(Links = MisLinks, Nodes = MisNodes, Source = "source",
 ```
 
 
-## Data Visualization Challenge
+# Data Visualization Challenge
+
+## The Flights Data
 
 <div class="notes">
 Now let's solve a specific data visualization problem so you can get a flavor for what working in R is like. 
@@ -198,8 +204,9 @@ Now let's solve a specific data visualization problem so you can get a flavor fo
 When you're visualizing lots of data, one of the key challenges is that the sheer quantity of data can make it difficult to view all at once. For instance, suppose that we're interested in the relationship between how long a flight is and how late it is likely to be. To tackle this problem we're going to use a data set with about a third of a million observations.
 </div>
 
-```{r, echo=FALSE}
-knitr::kable(head(flights, 8))
+```{r}
+nrow(flights)
+colnames(flights)
 ```
 
 ## A Naive Approach
@@ -210,7 +217,7 @@ You could easily imagine that this relationship could go either way -- naively t
 Here's a straightforward visualization of these flights; there are about a third of a million of them. This is what might happen if you try to visualize this relationship with a traditional drag and drop tool.
 </div>
 
-```{r}
+```{r, eval=FALSE}
 ggplot(flights, aes(x = distance, y = arr_delay)) + 
   geom_point()
 ```
@@ -343,13 +350,33 @@ ggplot(delay, aes(x = airtime, y = delay)) +
 ```
 
   
-## Reporting
+# Reporting
 
-- R Markdown: text and code together compiled with output to documents, web sites, and presentations
-- This entire presentation was built with R
-- Notebooks 
+<div class="notes">
+So now we've produced a visualization we can share. Of course, that isn't the end of the story. This visualization probably needs to go somewhere -- into a report, onto a web dashboard, in an e-mail. 
+</div>
 
-## Even Bigger Data
+## Reporting systems
+
+- Literate programming intersperses narrative and code
+- sweave: for LaTeX, etc. 
+- knitr: use Markdown input
+- R Markdown: built on knitr + pandoc; text and code together compiled with output to documents, web sites, and presentations
+- This entire presentation was built with R and R Markdown
+
+## Applications & interactive reporting
+
+- Shiny web framework
+- Web applications that show R visualization results
+- Applications can run R code to replay analysis 
+
+## Shiny example
+
+![superzip](superzip.png)
+
+# Even Bigger Data
+
+## Bigger data challenges
 
 <div class="notes">
 If you know a little more about R, you know that by nature it deals with data sets which are loaded into memory.  So how do you visualize even more data than can fit into RAM? 
@@ -359,8 +386,8 @@ The short answer is that it's not possible to draw more points than you have in 
 
 - RAM limitations and backing stores
 - More packages to get at your data
-- dplyr and backends
-- SparkR interface
+- dplyr and backends: front end to data 
+- Interface with Spark, hadoop, etc.
 
 # Acknowledgements
 
