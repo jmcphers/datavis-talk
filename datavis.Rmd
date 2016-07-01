@@ -5,6 +5,8 @@ output:
     theme: serif
     css: datavis.css
     incremental: yes
+resource_files:
+- datavis.css
 ---
 
 ```{r setup, include=FALSE}
@@ -16,6 +18,21 @@ library(dygraphs)
 library(networkD3)
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Introduction
+
+## About me 
+
+- Information visualization study at University of California, Davis
+- Career software engineer since 1996
+- Working with R and RStudio since 2013
+- Live in Seattle area of Washington with my family
+
+## 
+
+![](bea-dentist.jpg)
+
+## Tools are important
 
 ## Outline of this talk
 
@@ -162,6 +179,10 @@ Here I express the plot's main properties and then begin to compose a declarativ
 This may look foreign to you, but it quickly becomes easy to read. Compare this simple, compact representation to what you'd get out of a point and click tool. Everything about it is easy to tweak and modify. And if you want a colleague to be able to modify it, you need only copy and paste some text, not share a large file in a proprietary format.
 </aside>
 
+```{r}
+head(mtcars, 3)
+```
+
 ```{r, eval=FALSE}
 ggplot(mtcars, aes(x = mpg, y = hp)) +
   geom_point(color = mtcars$am + 1) + 
@@ -251,7 +272,7 @@ You could easily imagine that this relationship could go either way -- naively t
 Here's a straightforward visualization of these flights; there are about a third of a million of them. This is what might happen if you try to visualize this relationship with a traditional drag and drop tool.
 </aside>
 
-```{r, eval=FALSE}
+```{r, warning=FALSE}
 ggplot(flights, aes(x = distance, y = arr_delay)) + 
   geom_point()
 ```
@@ -553,9 +574,10 @@ Source for slides available here:
 
     https://github.com/jmcphers/datavis-talk
 
-[Exploratory Data](https://exploratory.io/)
-[HTML Widgets for R](http://www.htmlwidgets.org/index.html)
-[Spark Interface for R](https://github.com/rstudio/sparklyr) 
-[R for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund
-[ggplot2.SparkR](https://github.com/SKKU-SKT/ggplot2.SparkR)
+- [Getting Started with R](https://support.rstudio.com/hc/en-us/articles/201141096-Getting-Started-with-R)
+- [HTML Widgets for R](http://www.htmlwidgets.org/index.html)
+- [Spark Interface for R](https://github.com/rstudio/sparklyr) 
+- [R for Data Science](http://r4ds.had.co.nz/) by Hadley Wickham and Garrett Grolemund
+- [ggplot2.SparkR](https://github.com/SKKU-SKT/ggplot2.SparkR)
+- [Exploratory Data](https://exploratory.io/)
 
